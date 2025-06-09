@@ -1,4 +1,5 @@
 const Employee = require('../model/Employee');
+const Department = require('../model/DepartmentModel');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
@@ -13,6 +14,12 @@ module.exports = class RegisterEmployeeService {
 
     if (!name || !email || !phone || !departmentId) {
       throw new Error('Todos os campos são obrigatórios');
+    }
+
+    // Verifica se departmentId existe na tabela de departamentos
+    const departmentExists = await Department.findById(departmentId);
+    if (!departmentExists) {
+      throw new Error('Departamento não encontrado');
     }
 
     if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
