@@ -6,10 +6,10 @@ app.use(express.json());
 
 // Routes
 const EmployeesRoutes = require("./routes/EmployeeRoutes.js");
-//const DepartmentsRoutes = require("./routes/departments.js")
+const DepartmentsRoutes = require("./routes/DepartmentsRoutes.js");
 
 app.use("/employee", EmployeesRoutes);
-//app.use("/ors", DepartmentsRoutes);
+app.use("/department", DepartmentsRoutes)
 
 // Server dont restart
 app.get("/", (req, res) => {
