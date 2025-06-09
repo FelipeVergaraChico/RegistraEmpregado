@@ -6,7 +6,7 @@ app.use(express.json());
 
 // Routes
 const EmployeesRoutes = require("./routes/EmployeeRoutes.js");
-//const DepartmentsRoutes = require("./routes/departments.js")
+const DepartmentsRoutes = require("./routes/DepartmentsRoutes.js");
 
 app.use("/employee", EmployeesRoutes);
 app.use("/departments", DepartmentsRoutes)
