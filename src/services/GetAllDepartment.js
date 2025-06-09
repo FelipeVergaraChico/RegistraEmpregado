@@ -1,6 +1,6 @@
 const Department = require('../model/DepartmentModel.js');
 module.exports = class GetAllDepartment {
-  static async GetAllDepartments(req) {
+  static async getAllDepartments(req) {
     try {
       const departments = await Department.find();
       return departments;

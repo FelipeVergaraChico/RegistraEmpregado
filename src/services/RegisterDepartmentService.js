@@ -2,7 +2,7 @@ const Department = require('../model/DepartmentModel');
 require('dotenv').config();
 
 module.exports = class RegisterDepartment {
-  static async RegisterDepartment(name, description, req) {
+  static async registerDepartment(name, description, req) {
     if(!name || !description) {
       throw new Error('Nome e descrição são obrigatórios');
     }
