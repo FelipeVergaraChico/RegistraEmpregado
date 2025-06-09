@@ -9,7 +9,7 @@ const EmployeesRoutes = require("./routes/EmployeeRoutes.js");
 //const DepartmentsRoutes = require("./routes/departments.js")
 
 app.use("/employee", EmployeesRoutes);
-//app.use("/ors", DepartmentsRoutes);
+app.use("/departments", DepartmentsRoutes)
 
 // Server dont restart
 app.get("/", (req, res) => {
