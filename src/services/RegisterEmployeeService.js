@@ -4,6 +4,10 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
+
+function normalizePhone(phone) {
+  return phone.replace(/[^\d]/g, '');
+}
 module.exports = class RegisterEmployeeService {
   static async RegisterEmployee(name, email, phone, departmentId, password, req, res) {
     // Check if the employee already exists
@@ -26,6 +30,14 @@ module.exports = class RegisterEmployeeService {
       throw new Error('E-mail inválido');
     }
 
+    if(!/^\+?55?\s?\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/.test(phone)) {
+      throw new Error('Telefone inválido');
+    }
+    const normalizedPhone = normalizePhone(phone);
+    const existingEmployeePhone = await Employee.findOne({ phone: normalizedPhone });
+    if (existingEmployeePhone) {
+      throw new Error('Empregado já cadastrado com este telefone');
+    }
     if (!validator.isLength(password, { min: 6 })) {
       throw new Error('Senha deve ter pelo menos 6 caracteres');
     }
@@ -38,7 +50,7 @@ module.exports = class RegisterEmployeeService {
       name: name,
       password: passwordHash,
       email: email,
-      phone: phone,
+      phone: normalizedPhone,
       departmentId: departmentId,
       hiredAt: new Date(),
     });
