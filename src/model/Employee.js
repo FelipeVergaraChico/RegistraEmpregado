@@ -17,6 +17,10 @@ const Employee = moongose.model(
       type: String,
       required: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     departmentId: {
       type: Schema.Types.ObjectId,
       ref: "Department",
