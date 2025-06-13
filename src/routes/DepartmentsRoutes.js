@@ -4,7 +4,7 @@ const DepartmentController = require("../controller/DepartmentController.js");
 const AuthUser = require("../middlewares/AuthUser.js");
 const isRhDepartment = require("../middlewares/isRhDepartment.js");
 
-router.get("/search", DepartmentController.SearchDepartment);
+router.get("/search", AuthUser, DepartmentController.SearchDepartment);
 
 router.get("/", AuthUser, DepartmentController.GetAllDepartments);
 router.get("/:departmentId", AuthUser, DepartmentController.GetDepartmentById);

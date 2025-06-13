@@ -4,7 +4,7 @@ const EmployeeController = require("../controller/EmployeeController");
 const AuthUser = require("../middlewares/AuthUser.js");
 const isRhDepartment = require("../middlewares/isRhDepartment.js");
 
-router.get("/search", EmployeeController.SearchEmployee);
+router.get("/search", AuthUser, EmployeeController.SearchEmployee);
 
 router.get("/", AuthUser, EmployeeController.GetAllEmployees);
 router.get("/:id", AuthUser, EmployeeController.GetEmployeeById);
